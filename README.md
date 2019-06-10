@@ -2,11 +2,11 @@
 
 #### What?
 
-The purpose of this lesson is get you introduce you to [Storybook](https://storybook.js.org/), show you why it's useful, and provide a sandbox app where you can write your first stories for a component! We're going to cover:
+The purpose of this lesson is to introduce you to [Storybook](https://storybook.js.org/), show you why it's useful, and provide a sandbox app where you can write your first stories for a component! We're going to cover:
 
 - What is Storybook and what can it do?
 - Demo of [Globetrotter app](https://globetrotter.surge.sh/) and corresponding [Storybook app](https://globetrotter-components.surge.sh/)
-- Cool! How do we plan to use this at Insiten?
+- How do we plan to use this at Insiten?
 - Writing your first stories for a component
 - Implementing the Actions addon to log component emissions
 - Implementing the Knobs addon to dynamically adjust component properties
