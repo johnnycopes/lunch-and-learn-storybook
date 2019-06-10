@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'storybook-lunch-and-learn';
+  public title = 'storybook-lunch-and-learn';
+  public toggleOn = false;
+  public toggleDisabled = false;
+
+  public onToggleChange(newToggleState: boolean): void {
+    this.toggleOn = newToggleState;
+  }
 }

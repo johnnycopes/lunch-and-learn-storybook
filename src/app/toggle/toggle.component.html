@@ -1,0 +1,36 @@
+<div class="toggle"
+	[ngClass]="{
+		'toggle--locked': locked,
+		'toggle--disabled': disabled
+	}"
+	>
+	<div class="toggle__label"
+		[ngClass]="{'toggle__label--right': textPosition === 'right'}"
+		>
+		{{text}}
+	</div>
+	<div class="toggle__wrapper">
+		<input id="toggle__{{uuid}}"
+			class="toggle__input"
+			type="checkbox"
+			[disabled]="locked || disabled"
+			[checked]="model"
+			(click)="onToggle()"
+		/>
+		<label class="toggle__background"
+			for="toggle__{{uuid}}"
+			>
+			<div class="toggle__icon"
+				*ngIf="showLoadingIcons && model"
+				>
+				<div class="toggle__icon-element"
+					[ngClass]="{
+						'toggle__icon-element--checkmark': !loading,
+						'toggle__icon-element--loader': loading
+					}"
+					>
+				</div>
+			</div>
+		</label>
+	</div>
+</div>

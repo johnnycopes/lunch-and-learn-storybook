@@ -1,0 +1,181 @@
+.toggle {
+  $blue: skyblue;
+  $white: #fff;
+  $dark-gray: #333333;
+  $gray-tint-1: #aaaaaa;
+  $gray-tint-2: #dddddd;
+  $z-index: (
+    positive: 1
+  );
+
+	$toggle-container-width: 46px;
+	$toggle-switch-size: 28px;
+	$toggle-border-radius: 15px;
+	$toggle-border-color: $gray-tint-2;
+	$toggle-box-shadow: 0 1px 0 $toggle-border-color;
+	$toggle-animation-speed: 100ms;
+
+	display: flex;
+	align-items: center;
+	cursor: default;
+  height: 40px; // to match the height of the button
+
+	&__label {
+		font-weight: 700;
+    margin-right: 5px;
+    font-weight: 400;
+
+		&--right {
+			margin-right: 0;
+			margin-left: 5px;
+			order: 1;
+		}
+	}
+
+	&__wrapper {
+    display: flex;
+	}
+
+	// completely hide the input element
+	&__input {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		left: -100vh;
+	}
+
+	// the toggle background container
+	&__background {
+		cursor: pointer;
+		position: relative;
+		height: $toggle-switch-size;
+		width: $toggle-container-width;
+		border-radius: $toggle-border-radius;
+    box-shadow: $toggle-box-shadow;
+
+		// the toggle background during inactive state
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: $toggle-switch-size;
+			transform: translateY(-50%);
+			top: 50%;
+			left: 0;
+			background: $gray-tint-1;
+			border-radius: $toggle-border-radius;
+		}
+
+		// the toggle switch during inactive state
+		&::after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: $toggle-switch-size;
+			height: $toggle-switch-size;
+			transform: translateY(-50%);
+			top: 50%;
+			left: 0;
+			background: $white;
+			border-radius: $toggle-border-radius;
+			box-shadow: $toggle-box-shadow;
+			border: 1px solid $toggle-border-color;
+			transition: $toggle-animation-speed all ease-in-out;
+		}
+	}
+
+	// the toggle background during active state
+	&__input:checked + &__background::before {
+		background: $blue;
+	}
+
+	// the toggle switch during active state
+	&__input:checked + &__background::after {
+		transform: translate(calc(#{$toggle-container-width} - #{$toggle-switch-size}), -50%);
+	}
+
+	// the icon container, which sits on top of the toggle switch
+	&__icon {
+		$icon-width: 3px;
+
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+		width: $toggle-switch-size;
+		height: $toggle-switch-size;
+		z-index: map-get($z-index, positive);
+		animation: appear $toggle-animation-speed forwards;
+		visibility: hidden;
+
+		// this animation delays the visibility of icon for the same amount
+		// of time it takes for the toggle animation to complete
+		@keyframes appear {
+			99% { visibility: hidden; }
+			100% { visibility: visible; }
+		}
+
+		&-element {
+			position: relative;
+			width: 100%;
+			height: 100%;
+
+			&--checkmark {
+				&::after {
+					content: "";
+					position: absolute;
+					display: block;
+					top: 6px;
+					left: 10px;
+					width: 8px;
+					height: 13px;
+					border: solid $dark-gray;
+					border-width: 0 $icon-width $icon-width 0;
+					transform: rotate(45deg);
+				}
+			}
+
+			&--loader {
+				&::after {
+					content: "";
+					position: absolute;
+					display: block;
+					top: 25%;
+					left: 25%;
+					width: 50%;
+					height: 50%;
+					border-bottom: $icon-width solid $toggle-border-color;
+					border-radius: 50px;
+					animation: spin 700ms linear infinite;
+
+					@keyframes spin {
+						0% { transform: rotate(0deg); }
+						100% { transform: rotate(360deg); }
+					}
+				}
+			}
+		}
+	}
+
+	&--locked {
+		.toggle__background {
+			cursor: not-allowed;
+		}
+	}
+
+	&--disabled {
+		.toggle__label {
+			font-style: italic;
+			color: $gray-tint-2;
+		}
+
+		.toggle__background {
+			cursor: default !important;
+		}
+
+		.toggle__background::before {
+			background: $gray-tint-2 !important;
+		}
+	}
+}
