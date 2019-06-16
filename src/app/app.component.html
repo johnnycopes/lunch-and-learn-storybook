@@ -1,21 +1,52 @@
 <div class="app">
-  <h1 class="app__header">
-    The toggle switch is currently
-    <span style="color: salmon">
-      {{ toggleOn ? 'on' : 'off' }}
-    </span>.
-  </h1>
-  <app-toggle class="app__toggle"
-    text="Click me!"
-    textPosition="right"
-    [model]="toggleOn"
-    [disabled]="toggleDisabled"
-    (changeAction)="onToggleChange($event)"
-    >
-  </app-toggle>
+  <h2>Tab Panel</h2>
+  <div class="container">
+    <ng-template #headerButtons>
+      <button (click)="tabPanel.selectTab(logInTab)">Log In</button>
+      <button (click)="tabPanel.selectTab(signUpTab)">Sign Up</button>
+    </ng-template>
+
+    <app-tab-panel #tabPanel [headerTemplate]="">
+      <app-tab title="Log In" #logInTab>
+        <form>
+          <div class="form-field">
+            <label>Email:</label><input>
+          </div>
+          <div class="form-field">
+            <label>Password:</label><input>
+          </div>
+        </form>
+      </app-tab>
+      <app-tab title="Sign Up" #signUpTab>
+        <form>
+          <div class="form-field">
+            <label>Email:</label><input>
+          </div>
+          <div class="form-field">
+            <label>Password:</label><input>
+          </div>
+          <div class="form-field">
+            <label>Confirm Password:</label><input>
+          </div>
+        </form>
+      </app-tab>
+      <app-tab title="Contact">
+        <form>
+          <div class="form-field">
+            <label>Email:</label><input>
+          </div>
+          <div class="form-field">
+            <label>Message:</label>
+            <textarea></textarea>
+          </div>
+        </form>
+      </app-tab>
+    </app-tab-panel>
+  </div>
 
   <hr>
 
+  <h2>FontAwesome Input</h2>
   <app-fa-input
     icon="trash-o"
     >
@@ -25,4 +56,22 @@
       placeholder="rubbish"
     />
   </app-fa-input>
+
+  <hr>
+
+  <h2>Toggle Switch</h2>
+  <h3 class="app__header">
+    The toggle switch is currently
+    <span style="color: salmon">
+      {{ toggleOn ? 'on' : 'off' }}
+    </span>.
+  </h3>
+  <app-toggle class="app__toggle"
+    text="Click me!"
+    textPosition="right"
+    [model]="toggleOn"
+    [disabled]="toggleDisabled"
+    (changeAction)="onToggleChange($event)"
+    >
+  </app-toggle>
 </div>

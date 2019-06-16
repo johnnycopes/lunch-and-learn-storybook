@@ -1,0 +1,17 @@
+<ng-template #defaultTabsHeader let-tabs="tabs">
+  <ul class="tab-panel-buttons"
+    *ngIf="tabs"
+    >
+    <li class="tab-panel-button"
+      *ngFor="let tab of tabs"
+      [ngClass]="{'tab-panel-button--selected': tab.selected}"
+      (click)="selectTab(tab)"
+      >
+      {{tab.title}}
+    </li>
+  </ul>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTabsHeader; context: tabsContext">
+</ng-container>
+<ng-content></ng-content>
